@@ -12,9 +12,9 @@ void Spirograph()
 	SetTargetFPS(60);
 
 	// adjusting these changes the spirographs shape!
-	const float R = 280.0f;
-	const float r = 90.0f;
-	const float d = 60.0f;
+	float R = 280.0f;
+	float r = 90.0f;
+	float d = 60.0f;
 
 	const float cenX = width / 2.0f;
 	const float cenY = height / 2.0f;
@@ -31,6 +31,72 @@ void Spirograph()
 		// delta-time movement -> decouples speed from framerate
 		// prevents speed from being affected by framerate
 		float dt = GetFrameTime();
+		
+		// KEYBOARD CONTROLS //
+		
+		bool changed = false;
+
+		// Adjust big circle radius
+		if (IsKeyDown(KEY_R))
+		{
+			R += 100.0f * dt;
+			changed = true;
+		}
+
+		if (IsKeyDown(KEY_F))
+		{
+			R -= 100.0f * dt;
+			changed = true;
+		}
+
+		// Adjust small circle radius
+		if (IsKeyDown(KEY_T))
+		{
+			r += 100.0f * dt;
+			changed = true;
+		}
+
+		if (IsKeyDown(KEY_G))
+		{
+			r -= 100.0f * dt;
+			changed = true;
+		}
+
+		// Adjust pencil distance
+		if (IsKeyDown(KEY_Y))
+		{
+			d += 100.0f * dt;
+			changed = true;
+		}
+
+		if (IsKeyDown(KEY_H))
+		{
+			d -= 100.0f * dt;
+			changed = true;
+		}
+
+		// Prevent invalid values
+		R = Clamp(R, 10.0f, 450.0f);
+		r = Clamp(r, 5.0f, R - 5.0f);
+		d = Clamp(d, 0.0f, 400.0f);
+
+		// Reset values
+		if (IsKeyPressed(KEY_SPACE))
+		{
+			R = 280.0f;
+			r = 90.0f;
+			d = 60.0f;
+		}
+
+		// Clear screen and restart drawing when values change
+		if (changed)
+		{
+			trail.clear();
+			t = 0.0f;
+		}
+		
+		// CALCULATIONS //
+		
 		t += speed * dt;
 
 		// big circle center
@@ -48,6 +114,8 @@ void Spirograph()
 
 		// store the current position of pencil tip
 		trail.push_back(drawingPoint);
+
+		// DRAWING //
 
 		BeginDrawing();
 		ClearBackground(BLACK);
@@ -74,6 +142,18 @@ void Spirograph()
 		{
 			DrawLineEx( trail[i - 1], trail[i], 2.0f, SKYBLUE );
 		}
+
+		// DISPLAY CONTROLS //
+
+		DrawText("SPIROGRAPH CONTROLS", 20, 20, 20, WHITE);
+
+		DrawText(TextFormat("R / F : Big Circle Radius (R): %.1f", R), 20, 55, 18, WHITE);
+
+		DrawText(TextFormat("T / G : Small Circle Radius (r): %.1f", r), 20, 80, 18, WHITE);
+
+		DrawText(TextFormat("Y / H : Pencil Distance (d): %.1f", d), 20, 105, 18, WHITE);
+
+		DrawText("SPACE : Reset Values", 20, 140, 18, LIGHTGRAY);
 
 		EndDrawing();
 	}
