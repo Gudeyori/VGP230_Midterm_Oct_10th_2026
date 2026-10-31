@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Hypotrochoid_Spirograph/Hypotrochoid_Spirograph.vcxproj" />
+  <Project Path="Hypotrochoid_Spirograph/Hypotrochoid_Spirograph.vcxproj" Id="c483862d-22da-4271-94ca-c540b47dd355" />
 </Solution>

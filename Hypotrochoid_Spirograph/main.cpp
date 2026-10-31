@@ -86,6 +86,8 @@ void Spirograph()
 			R = 280.0f;
 			r = 90.0f;
 			d = 60.0f;
+
+			changed = true;
 		}
 
 		// Clear screen and restart drawing when values change
