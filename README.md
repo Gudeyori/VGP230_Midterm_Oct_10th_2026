@@ -1,6 +1,6 @@
 Hypotrochoid Spirograph
 
-<img width="997" height="985" alt="SpiroBoi" src="https://github.com/user-attachments/assets/d1738d87-d116-4c7c-aeab-e0ac92312c92" />
+<img width="939" height="937" alt="SpiroBoi2" src="https://github.com/user-attachments/assets/61992c82-c018-4550-b990-1f5c8eb560af" />
 
 A real-time, interactive hypotrochoid spirograph simulator built in C++ using raylib.
 
@@ -62,6 +62,7 @@ T	Increase small circle radius (r)
 G	Decrease small circle radius (r)
 Y	Increase pencil distance (d)
 H	Decrease pencil distance (d)
+C Change spirograph color
 SPACE	Reset all parameters to default values
 Adjustable Parameters
 Parameter	Default	Description
