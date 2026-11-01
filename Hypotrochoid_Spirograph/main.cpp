@@ -26,6 +26,10 @@ void Spirograph()
 	// so that they can be connected
 	std::vector<Vector2> trail;
 
+	// this vector is for cycling through colors :D
+	std::vector<Color> colors = { RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, WHITE };
+	int colorIndex = 0; // starting color
+
 	while (!WindowShouldClose())
 	{
 		// delta-time movement -> decouples speed from framerate
@@ -86,7 +90,12 @@ void Spirograph()
 			R = 280.0f;
 			r = 90.0f;
 			d = 60.0f;
+			changed = true;
+		}
 
+		if (IsKeyPressed(KEY_C))
+		{
+			colorIndex = (colorIndex + 1) % colors.size();
 			changed = true;
 		}
 
@@ -142,7 +151,7 @@ void Spirograph()
 		// take previous tip position and current tip position and connect them
 		for (int i = 1; i < trail.size(); i++)
 		{
-			DrawLineEx( trail[i - 1], trail[i], 2.0f, SKYBLUE );
+			DrawLineEx(trail[i - 1], trail[i], 2.0f, colors[colorIndex]);
 		}
 
 		// DISPLAY CONTROLS //
@@ -155,7 +164,9 @@ void Spirograph()
 
 		DrawText(TextFormat("Y / H : Pencil Distance (d): %.1f", d), 20, 105, 18, WHITE);
 
-		DrawText("SPACE : Reset Values", 20, 140, 18, LIGHTGRAY);
+		DrawText("C : Change Spirograph Color", 20, 140, 18, LIGHTGRAY);
+
+		DrawText("SPACE : Reset Values", 20, 165, 18, LIGHTGRAY);
 
 		EndDrawing();
 	}
